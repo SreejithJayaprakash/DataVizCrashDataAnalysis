@@ -1,0 +1,346 @@
+#header{
+	background-color: #3f63a1;
+	color: white;
+}
+
+.headerTag{
+	margin-left: 5%;
+}
+
+.dropbtn {
+    background-color: #504545;
+    color: white;
+    padding-left: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+}
+
+.row{
+	margin-right: 0px !important;
+	margin-left: 0px !important; 
+}
+
+#reasonSearchDiv{
+	float: right;
+}
+
+.userTypeBtn:hover, .dropbtn:focus {
+	background-color: #008bff;
+}
+.userTypeBtn{
+	width: 100%;
+	border-width: 5px;
+	background-color: white;
+    border-color: #504545;
+}
+
+#resetBtn{
+    width: 15%;
+    background-color: #de1f1c;
+    color: white;
+    height: 32px;
+    border: none;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #008bff;;
+}
+#YearSearchDiv{
+	margin-left: 30px;
+}
+
+#PostalSearchDiv{
+    margin-left: 10px;
+}
+
+.tooltip{ 
+    width: 80px; 
+    height: 80px; 
+    position: absolute; 
+    left: -9999p; 
+}
+
+.userColmn{
+	padding: 0px;
+}
+
+#dayNight{
+	width:80%; 
+	margin:0 auto; 
+	padding-left: 40%;
+    margin-bottom: 20px;
+}
+
+.dayNightBtn{
+	color: white;
+	border: none;
+    width: 64px;
+    height: 64px;
+    background-color: transparent;
+    margin-left: 30px;
+}
+
+.button {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #008bff; 
+    color: white;
+}
+
+
+.dayNightBtn : hover, .dayNightBtn:focus {background-color: #008bff}
+
+.year_cont{
+	width:35%;
+	margin-left: 5%;
+}
+
+#gender_M{
+    float: left;
+    background-image: url("../Image/Male.png");
+    width: 32px;
+    height: 32px;
+    border: none;
+}
+
+#Day{
+    background-image: url("../Image/dayTime.png");
+}
+
+#Dawn{
+    background-image: url("../Image/dawnTime.png");
+}
+
+#Night{
+    background-image: url("../Image/nightTime.png");
+}
+
+#Clear{
+
+    background-image: url("../Image/clearWeather.png");
+}
+
+#Raining{
+
+    background-image: url("../Image/rain.png");
+}
+
+#wind{
+    background-image: url("../Image/wind.png");
+}
+
+
+#Snowing{
+    background-image: url("../Image/snow_weather.png");
+}
+
+#Low{
+    background-image: url("../Image/low_vision.png");
+}
+
+#gender_F{
+    float: right;
+    background-image: url("../Image/Female.png");
+    width: 32px;
+    height: 32px;
+    width: 32px;
+    height: 32px;
+    border: none;
+}
+
+#reasonDisBtn{
+	width: 200px;
+	padding-right: 20px; 
+}
+
+
+
+#userTypeRow{
+	background-color: white;
+	width: 99.9%;
+}
+.genderBtnSelected{
+	background-color: #2985d2 !important;
+}
+
+.subTitle{
+	color: #2e58a1;
+    font-weight: bold;
+}
+
+.speedBtn{
+    margin-left: 38%;
+    width: 50%;
+    background-color: #504545;
+    color: white;
+    border-color: #f9feff;
+    border-width: 3px;
+}
+.speedBtn : hover {background-color: #008bff}
+
+.ageBtn{
+    margin-left: 38%;
+    width: 50%;
+    background-color: #504545;
+    color: white;
+    border-color: #f9feff;
+    border-width: 3px;
+}
+
+.ageBtn : hover {background-color: #008bff}
+
+.atmCondBtn{
+	width: 64px;
+    height: 64px;
+	color: white;
+	border: 1px;
+    margin-left: 30px;
+    background-color: transparent;
+}
+
+.atmCondBtn : hover {background-color: #008bff}
+
+.atmTypeBtnSelected{
+	background-color: #2985d2 !important;
+}
+
+.dayNightBtnSelected{
+	background-color: #2985d2 !important;
+}
+
+.speedBtnSelected{
+	background-color: #008bff !important;
+}
+
+.ageBtnSelected{
+	background-color: #008bff !important;
+}
+
+.userTypeBtnSelected{
+	background-color: #008bff !important;
+	color: white;
+}
+
+.safetyCheckBtnSelected{
+    background-color: #008bff !important;
+}
+
+.safetyCheckBtn{
+    width: 64px;
+    height: 64px;
+    color: white;
+    border: none;
+    margin-left: 20px;
+    background-color: transparent;
+    float: right;
+}
+
+#safety_Y{
+    background-image: url("../Image/seatBelt.png");
+}
+
+#safety_N{
+    background-image: url("../Image/noSeatBelt.png");
+}
+
+#speedzone{
+    background-image: url("../Image/road.png");
+}
+
+.tooltip > svg{ 
+    margin:auto; 
+    display: block; 
+}
+
+#postalCodeSearch {
+    border-box: box-sizing;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#postalCodeSearch:focus {outline: 3px solid #ddd;}
+
+#yearDropdown{
+	height: 400px;
+}
+
+#reasonDropdown{
+	height: 400px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+}
+
+.dropdown : hover {background-color: #ddd}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #cde2ec;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    background-color: #cde2ec;
+}
+
+.dropdown a:hover {background-color: #ddd}
+
+
+.show {display:block;}
+
+
+.bar {
+  
+  fill: #504545;
+}
+
+.finding{
+    color: #504545;
+    font-size: 18px;
+}
+
+.map-tip{
+    background-color: #504545;
+    color: white;
+    padding: 5px;
+}
+
+.graph-tip{
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+
+.bar:hover {
+  
+  fill: #2985d2;
+}
+
+.axis--x path {
+  display: none;
+}
+
+#graphBox{
+	margin-left: 30px;
+}

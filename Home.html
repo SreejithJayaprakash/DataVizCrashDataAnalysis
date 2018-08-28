@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Victoria Crash Data Analysis</title>
+	<meta charset="utf-8">
+	<!-- CSS Files -->
+	<!--Leaflet CSS -->
+	<link rel="stylesheet" href="Styles/leaflet.css"/>
+
+	<!-- Bootstrap minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+
+	<!--Script Files-->
+	<!--Script Files for d3-->
+    <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+    <script type="text/javascript" src="script/d3.v4.min.js"></script>
+    <!--Script Files for leaflet-->
+    <script type="text/javascript" src="script/leaflet.js"></script>
+	<!--Script Files for jQuery library -->
+	<script type="text/javascript" src="script/jquery.min.js"></script>
+	<!--Script Files for Bootstrap JavaScript -->
+	<script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script type="text/javascript" src="script/d3-tip.js"></script>
+
+
+	<!--Custom CSS files-->
+	<link rel="stylesheet" href="Styles/Home.css"/>
+
+</head>
+<body style="background-color: #f6f6f6;">
+	<div class="row" style="width: 100%; height: 700px; background-image: url('Image/bg_crash.png'); background-size: 100%; overflow: hidden; text-align: center;">
+        <div style="display: inline-block;margin-top: 300px;font-size: 56px; width: 100%; font-weight: bold; color: whitesmoke;">Victoria</div>
+        <div style="display: inline-block;margin-top: 30px;font-size: 56px; font-weight: bold; color: whitesmoke;">Crash Statistics Analysis</div>
+    </div>
+    <!--
+	<div class="row" id="header">
+		<h1 class="headerTag">Interactive Victoria Crash Report</h1>
+	</div>-->
+	<div style="width:100%; height: 700px; padding-left: 30px">
+		<div class="row">
+			<h1 style="font-weight: bold; color: #2e58a1;">Introduction</h1>
+		</div>
+		<div class="row">
+			<svg width="80%" height="20"><line x1="0" y1="0" x2="1700" y2="0" stroke="gray"/></svg>
+		</div>
+		<div class="row">
+			<span class="bodySpan">This site helps you to analyse the various parameters that influences road accidents. It helps in formualating new plans and evaluating the existing plans on various conditions. The tool is specifically designed for the usage of victoria government authorities based on the data set provided in their official website.<br/><br/>
+
+				You will scroll down to the first page which will help you filter the various data based on different options provided like-:<br/>
+				1. year - Present as drop down button at top-left corner<br/>
+				2. weather condition - present as images with cloud symbol in between year and reasons<br/>
+				3. time of the day - present as images with sun symbols under the atmospheric buttons<br/>
+				4. User type in accident - Presnt at the bottom of the map<br/>
+				5. speed zone - Present as ladder of buttons to the right of the map<br/>
+				6. age group of people involved - Present to the right of the map, below speed zones<br/>
+				7. Reasons for the accident - Present as a filter in the top-right corner<br/>
+				8. Sex - Present at top left and right corners with image <br/>
+				9. ZipCode- Present as both grid and drop down to the left of the map<br/>
+				10. Reset Button - Present next to the male button<br/><br/><br/>
+
+			All the above buttons are used to filter the map and the two graphs below to get bettwer insights from the data for the users.<br/><br/></span>
+
+			<h2 style="font-weight: bold; color: #2e58a1;"> Usage </h2>
+			<span class="bodySpan">
+			Using the map, we can see the affected areas geographically. The zip code can be chosen from the drop down or from the top 150 significant zipcodes (based on accident count values) provided on the left hand side of the map. These are provided for easy access to the user and the zip code are arranged row wise down in the decreasing order of accident count in each area.<br/><br/>
+
+
+			The filters can be chosen one from each group and the combination of all such filters will be used to list the statistical graphs below.
+
+			</span>
+		</div>
+	</div>
+	<div class="row">
+			<!--<svg width="100%" height="20"><line x1="0" y1="0" x2="2700" y2="1" stroke="gray"/></svg>-->
+	</div>
+	<div class="row" style="background-color: #a1a1a1; height: 90px;">
+			<h1>Dashboard</h1>
+	</div>
+	<div class="row">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="row" id="YearSearchDiv">
+				<button onclick="yearDropDownBtnClicked()" id="yearDisBtn" class="dropbtn" title="choose year filter">All Year</button>
+  				<div id="yearDropdown" class="dropdown-content">
+    				<input type="text" placeholder="Search.." id="yearSearch" onkeyup="filterYearFunction()">
+    				<a onclick="selectedYear(0)">All Year</a>
+    				<a onclick="selectedYear(2006)">2006</a>
+    				<a onclick="selectedYear(2007)">2007</a>
+    				<a onclick="selectedYear(2008)">2008</a>
+    				<a onclick="selectedYear(2009)">2009</a>
+    				<a onclick="selectedYear(2010)">2010</a>
+    				<a onclick="selectedYear(2011)">2011</a>
+    				<a onclick="selectedYear(2012)">2012</a>
+    				<a onclick="selectedYear(2013)">2013</a>
+    				<a onclick="selectedYear(2014)">2014</a>
+    				<a onclick="selectedYear(2015)">2015</a>
+    				<a onclick="selectedYear(2016)">2016</a>
+    				<a onclick="selectedYear(2017)">2017</a>
+  				</div>
+			</div>
+			</div>
+			<div class="col-sm- 7">
+				<button class="atmCondBtn" id="Clear" onclick="atmTypeSelected('Clear')" title="clear weather"></button>
+				<button class="atmCondBtn" id="Raining" onclick="atmTypeSelected('Raining')" title="rainy weather"></button>
+				<button class="atmCondBtn" id="wind" onclick="atmTypeSelected('Strong winds')" title="windy weather"></button>
+				<button class="atmCondBtn" id="Snowing" onclick="atmTypeSelected('Snowing')" title="snowy weather"></button>
+				<button class="atmCondBtn" id="Low" onclick="atmTypeSelected('Low Vision')" title="smoke, dust, fog weather"></button>
+				<div class="row" id="reasonSearchDiv">
+					<button onclick="reasonSearchBtnClicked()" id="reasonDisBtn" class="dropbtn" title="choose accident reasons">All Reasons</button>
+					<div id="reasonDropdown" class="dropdown-content">
+						<input type="text" placeholder="Search.." id="reasonSearch" onkeyup="filterReasonFunction()">
+						<a onclick="selectedReason('')">All Reasons</a>
+						<a onclick="selectedReason('Collision with a fixed object')">Collision with a fixed object</a>
+						<a onclick="selectedReason('collision with some other object')">collision with some other object</a>
+						<a onclick="selectedReason('Collision with vehicle')">Collision with vehicle</a>
+						<a onclick="selectedReason('Fall from or in moving vehicle')">Fall from or in moving vehicle</a>
+						<a onclick="selectedReason('No collision and no object struck')">No collision and no object struck</a>
+						<a onclick="selectedReason('Other accident')">Other accident</a>
+						<a onclick="selectedReason('Struck animal')">Struck animal</a>
+						<a onclick="selectedReason('Struck Pedestrian')">Struck Pedestrian</a>
+						<a onclick="selectedReason('Vehicle overturned (no collision)')">Vehicle overturned (no collision)</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="dayNight">
+			<button class="dayNightBtn" id="Day" onclick="dayNightSelected('Day')" title="Day time"></button>
+			<button class="dayNightBtn" id="Dawn" onclick="dayNightSelected('Dawn')" title="Dawn time"></button>
+			<button class="dayNightBtn" id="Night" onclick="dayNightSelected('Night')" title="Night time"></button>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 10px;">
+		<div class="col-sm-5" style="padding-right: 0px;">
+			<h2 class="subTitle">Postal Code</h2>
+			<div class="row" id="PostalSearchDiv">
+				<button onclick="postalDropDownBtnClicked()" class="dropbtn" id="zipDispBtn" title="drop down to select postal code">Postal code</button>
+  				<div id="postalDropdown" class="dropdown-content">
+    				<input type="text" placeholder="Search.." id="postalCodeSearch" onkeyup="filterPostalCodeFunction()">
+    				
+  				</div>
+			</div>
+			<div id="postalCode" class = "row" style="height: 600px">
+			</div>
+			<div class="row" style="display: none;">
+
+				
+				<button class="safetyCheckBtn" id="safety_N" onclick="safetyCheckSelected('N')" title="Seat belt and helmet not worn"></button>
+				<button class="safetyCheckBtn" id="safety_Y" onclick="safetyCheckSelected('Y')" title="Seat belt and helmet worn">
+					
+				</button>
+				<h2 class="subTitle"style="float: right;">Safety check</h2>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="row">
+				<button id="gender_M" class="genderBtn" onclick="genderValSelected('M')" title="Filter to see Male data only"></button>
+				<button onclick="resetMapToOrginal()" id="resetBtn" title="click to reset all the filters">Reset</button>
+				<button id="gender_F" class="genderBtn" onclick="genderValSelected('F')" title="Filter to see Female data only"></button>
+			</div>
+			<div id="mapBox" class = "row" style="width: 100%; height: 600px">
+			</div>
+			<div class="row" id="userTypeRow">
+				<div class="col-sm-4 userColmn">
+					<button id="Bicyclists" class="userTypeBtn" onclick="userTypeSelected('Bicyclists')" title="click to filter on user types">Bicyclists</button>
+				</div>
+				<div class="col-sm-4 userColmn">
+					<button id="Motorcyclists" class="userTypeBtn" onclick="userTypeSelected('Motorcyclists')" title="click to filter on user types">Motorcyclists</button>
+				</div>
+				<div class="col-sm-4 userColmn">
+					<button id="Drivers" class="userTypeBtn" onclick="userTypeSelected('Drivers')" title="click to filter on user types">Drivers</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<h2 class="subTitle">Speed Zone</h2>
+			<div class="row" id="speedzone">
+				<div class="row">
+					<button id="speed_30" class="speedBtn" onclick="speedZoneSelectedWithVal(30)" title="click to filter on speed zone">30</button>
+				</div>
+				<div class="row">
+					<button id="speed_40" class="speedBtn" onclick="speedZoneSelectedWithVal(40)" title="click to filter on speed zone">40</button>
+				</div>
+				<div class="row">
+					<button id="speed_50" class="speedBtn" onclick="speedZoneSelectedWithVal(50)" title="click to filter on speed zone">50</button>
+				</div>
+				<div class="row">
+					<button id="speed_60" class="speedBtn" onclick="speedZoneSelectedWithVal(60)" title="click to filter on speed zone">60</button>
+				</div>
+				<div class="row">
+					<button id="speed_70" class="speedBtn" onclick="speedZoneSelectedWithVal(70)" title="click to filter on speed zone">70</button>
+				</div>
+				<div class="row">
+					<button id="speed_75" class="speedBtn" onclick="speedZoneSelectedWithVal(75)" title="click to filter on speed zone">75</button>
+				</div>
+				<div class="row">
+					<button id="speed_80" class="speedBtn" onclick="speedZoneSelectedWithVal(80)" title="click to filter on speed zone">80</button>
+				</div>
+				<div class="row">
+					<button id="speed_90" class="speedBtn" onclick="speedZoneSelectedWithVal(90)" title="click to filter on speed zone">90</button>
+				</div>
+				<div class="row">
+					<button id="speed_100" class="speedBtn" onclick="speedZoneSelectedWithVal(100)" title="click to filter on speed zone">100</button>
+				</div>
+				<div class="row">
+					<button id="speed_110" class="speedBtn" onclick="speedZoneSelectedWithVal(110)" title="click to filter on speed zone">110</button>
+				</div>
+			</div>
+			<h2 class="subTitle">Age Group</h2>
+			<div class="row" id="Agegroup">
+				<div class="row">
+					<button id="age_05-12" class="ageBtn" onclick="ageSelectedWithVal('05-12')" title="click to filter on age">05-12</button>
+				</div>
+				<div class="row">
+					<button id="age_13-15" class="ageBtn" onclick="ageSelectedWithVal('13-15')" title="click to filter on age">13-15</button>
+				</div>
+				<div class="row">
+					<button id="age_16-17" class="ageBtn" onclick="ageSelectedWithVal('16-17')" title="click to filter on age">16-17</button>
+				</div>
+				<div class="row">
+					<button id="age_17-21" class="ageBtn" onclick="ageSelectedWithVal('17-21')" title="click to filter on age">17-21</button>
+				</div>
+				<div class="row">
+					<button id="age_22-25" class="ageBtn" onclick="ageSelectedWithVal('22-25')" title="click to filter on age">22-25</button>
+				</div>
+				<div class="row">
+					<button id="age_26-29" class="ageBtn" onclick="ageSelectedWithVal('26-29')" title="click to filter on age">26-29</button>
+				</div>
+				<div class="row">
+					<button id="age_30-39" class="ageBtn" onclick="ageSelectedWithVal('30-39')" title="click to filter on age">30-39</button>
+				</div>
+				<div class="row">
+					<button id="age_40-49" class="ageBtn" onclick="ageSelectedWithVal('40-49')" title="click to filter on age">40-49</button>
+				</div>
+				<div class="row">
+					<button id="age_50-59" class="ageBtn" onclick="ageSelectedWithVal('50-59')" title="click to filter on age">50-59</button>
+				</div>
+				<div class="row">
+					<button id="age_60-64" class="ageBtn" onclick="ageSelectedWithVal('60-64')" title="click to filter on age">60-64</button>
+				</div>
+				<div class="row">
+					<button id="age_64-69" class="ageBtn" onclick="ageSelectedWithVal('64-69')" title="click to filter on age">64-69</button>
+				</div>
+				<div class="row">
+					<button id="age_70" class="ageBtn" onclick="ageSelectedWithVal('70+')" title="click to filter on age">70+</button>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="row">
+		<svg width="100%" height="3"><line x1="0" y1="0" x2="1700" y2="2" stroke="gray"/></svg>
+	</div>
+	<h1 class="subTitle">Accident Count on Days of Week</h1>
+	<span style="color: #504545;">Accident Count</span>
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="row" id="graphBox">
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="row finding">
+				<span> This graph details the accident count on different days of the week based on above filter.<br/><br/></span>
+				<strong>Finding: <br/></strong>
+				<span>
+					1. Here we could see that Friday is the day with most accidents for almost all days with thursday, saturday and sunday contributing to the accident count count highly with varying filter.<br/>
+					2. Using this and the map, we could see which day, what area has more issues. Plus, we could check if the atmospheric condition and the speed zones the issue has occured frequently.<br/>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<svg width="100%" height="3"><line x1="0" y1="0" x2="2500" y2="2" stroke="gray"/></svg>
+	</div>
+	<h1 class="subTitle">Accident Count on Age group</h1>
+	<span style="color: #504545;">Accident Count</span>
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="row" id="ageBubbleChart">
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="row finding">
+				<span> This graph details the accident count on different age groups based on above filter.<br/><br/></span>
+				<strong>Finding: <br/></strong>
+				<span>
+					1. Here we could see that the age group between 17 to 60 causes most of the accidents. Along with the same, the percentage contribution of people aged above 70+ is also significant once you normalise the data.<br/>
+					2. This graph could further be used to measure the effect of various parameters on age group causing accidents.<br/>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<!--Custom Files-->
+	<!--Script Files-->
+	<script type="text/javascript" src="script/Home.js"></script>
+</body>
+</html>
